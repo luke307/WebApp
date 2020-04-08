@@ -16,12 +16,13 @@ with open(filePath, 'r') as file:
 
     for line in file:
 
-        pos1 = line.find('dstip')
+        pos1 = line.find('dstip="')
         assert pos1 != -1
         pos1 += 7
-        pos2 = line.find('" proto')
+        temp = line[pos1:]
+        pos2 = temp.find('"',7,15)
         assert pos2 != -1
-        ip = line[pos1:pos2]
+        ip = temp[:pos2]
         ipAdr.append(ip)
 
 cntIP = Counter(ipAdr)
